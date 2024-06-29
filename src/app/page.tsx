@@ -1,4 +1,4 @@
-import FaceDetection from "./fakeDetection/page";
+import FakeDetection from "./fakeDetection/page";
 
 export default function Home() {
   return (
