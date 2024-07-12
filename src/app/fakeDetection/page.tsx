@@ -26,7 +26,7 @@ const FakeDetection = () => {
       setMessage(`After Processing, we send it into ${email} this email. `);
       toast.success(`After Processing, We send it into ${email} this email. `, {
         id: toastId,
-        duration: 100000,
+        duration: 9000,
       });
     }
   };
@@ -42,10 +42,10 @@ const FakeDetection = () => {
               <p className="text-slate-600 text-sm italic my-1">
                 Target video upload here
               </p>
-              <div className="border-2 rounded-lg shadow-md border-dashed  mt-5">
-                <form onSubmit={(e) => onSubmitHandler(e)}>
-                  <div className=" cursor-pointer">
-                    <label htmlFor="files" className=" bg-[#F5F7F8]">
+              <div className="border-2 rounded-lg shadow-md border-dashed mt-5">
+                <form onSubmit={onSubmitHandler}>
+                  <div className="cursor-pointer">
+                    <label htmlFor="files" className="bg-[#F5F7F8]">
                       <div className="w-1/4 h-1/4 mx-auto cursor-pointer">
                         <Image
                           width={200}
@@ -55,7 +55,7 @@ const FakeDetection = () => {
                           alt="original_image"
                         />
                       </div>
-                      <p className=" text-center font-serif text-sm font-thin mt-5">
+                      <p className="text-center font-serif text-sm font-thin mt-5">
                         Upload <span className="text-red-600">Video</span> or{" "}
                         <span className="text-red-600">GIF</span>
                       </p>
@@ -82,6 +82,18 @@ const FakeDetection = () => {
                     />
                   </div>
 
+                  <div className="mt-5">
+                    {attachment && (
+                      <video
+                        className="w-full h-60"
+                        controls
+                        src={URL.createObjectURL(attachment)}
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
+                  </div>
+
                   <div
                     className={`${
                       attachment ? "block" : "hidden"
@@ -90,19 +102,25 @@ const FakeDetection = () => {
                     <input
                       className="border p-2 rounded-md"
                       type="email"
-                      placeholder="Enter you email"
+                      placeholder="Enter your email"
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  {message && <p className="text-center text-green-600 font-serif text-lg">{message}</p>}
+
+                  {message && (
+                    <p className="text-center text-green-600 font-serif text-lg">
+                      {message}
+                    </p>
+                  )}
+
                   <div
                     className={`${
                       email ? "block" : "hidden"
-                    }  w-1/2 flex justify-center mx-auto`}
+                    } w-1/2 flex justify-center mx-auto`}
                   >
                     <button
                       type="submit"
-                      className="my-2 px-4 py-4  cursor-pointer rounded-xl text-lg font-semibold text-center bg-gray-200"
+                      className="my-2 px-4 py-4 cursor-pointer rounded-xl text-lg font-semibold text-center bg-gray-200"
                     >
                       Start Detection
                     </button>
@@ -114,7 +132,7 @@ const FakeDetection = () => {
         </div>
         <div>
           <p className="text-xl text-center font-semibold font-sans mt-10">
-            Identify this video is real or fake.
+            Identify if this video is real or fake.
           </p>
 
           <div className="w-11/12 mx-auto my-10">
